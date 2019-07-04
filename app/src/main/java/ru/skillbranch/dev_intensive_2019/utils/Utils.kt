@@ -14,24 +14,27 @@ object Utils {
         }
     }
 
+
+
     fun toInitials(firstName: String?, lastName: String?):String? {
-        var first: String? = firstName?.toUpperCase()
-        var last: String? = lastName?.toUpperCase()
-        var f: Char?
-        var l: Char?
-        if (last != "" && last != " " && last !=null && first != "" && first != " "){
+        val first: String? = firstName?.toUpperCase()
+        val last: String? = lastName?.toUpperCase()
+        val f: Char?
+        val l: Char?
+        if (last != "" && last != " " && last != "  " && last != "   " && last !=null && first != "" && first != " " && first != "  " && first != "   "){
             f = first?.get(0)
-            l = last?.get(0)
+            l = last.get(0)
             return "$f$l" }
-            else if (first != "" && first !=" "){
+        else if (first != "" && first !=" " && first !="  "&& first !="   " && first !="    "){
             f = first?.get(0)
             return "$f"}
-            else return null
-        }
+        else return null
+    }
+
 
     fun transliteration(payload:String, divider:String = " "):String{
 
-        var fullname= parseFullName(payload)
+        val fullname= parseFullName(payload)
 
         // разбиваю полное имя на имя и фамилию и перевожу в нижний регистр
         var name1 = fullname.first
@@ -39,13 +42,12 @@ object Utils {
         name1 = name1?.toLowerCase()
         name2 = name2?.toLowerCase()
         // разбиваю имя и фамилию на отдельные карактеры
-        var name1array:CharArray? = name1?.toCharArray()
-        var name2array:CharArray? = name2?.toCharArray()
+        val name1array:CharArray? = name1?.toCharArray()
+        val name2array:CharArray? = name2?.toCharArray()
 
         //
         var lenght:Int? = name1array?.size
-        var counter:Int = 0
-
+        var counter = 0
         // транслитерирую имя
         name1 = ""
         while (counter != lenght){
@@ -84,32 +86,32 @@ object Utils {
                                       'ю' -> name1 += "yu"
                                       'я' -> name1 += "ya"
 
-                                            'a' -> name1 += 'a'
-                                            'b' -> name1 += 'b'
-                                            'c' -> name1 += 'c'
-                                            'd' -> name1 += 'd'
-                                            'e' -> name1 += 'e'
-                                            'f' -> name1 += 'f'
-                                            'g' -> name1 += 'g'
-                                            'h' -> name1 += 'h'
-                                            'i' -> name1 += 'i'
-                                            'j' -> name1 += 'j'
-                                            'k' -> name1 += 'k'
-                                            'l' -> name1 += 'l'
-                                            'm' -> name1 += 'm'
-                                            'n' -> name1 += 'n'
-                                            'o' -> name1 += 'o'
-                                            'p' -> name1 += 'p'
-                                            'q' -> name1 += 'q'
-                                            'r' -> name1 += 'r'
-                                            's' -> name1 += 's'
-                                            't' -> name1 += 't'
-                                            'u' -> name1 += 'u'
-                                            'v' -> name1 += 'v'
-                                            'w' -> name1 += 'w'
-                                            'x' -> name1 += 'x'
-                                            'y' -> name1 += 'y'
-                                            'z' -> name1 += 'z'
+                                            'a' -> name1 += "a"
+                                            'b' -> name1 += "b"
+                                            'c' -> name1 += "c"
+                                            'd' -> name1 += "d"
+                                            'e' -> name1 += "e"
+                                            'f' -> name1 += "f"
+                                            'g' -> name1 += "g"
+                                            'h' -> name1 += "h"
+                                            'i' -> name1 += "i"
+                                            'j' -> name1 += "j"
+                                            'k' -> name1 += "k"
+                                            'l' -> name1 += "l"
+                                            'm' -> name1 += "m"
+                                            'n' -> name1 += "n"
+                                            'o' -> name1 += "o"
+                                            'p' -> name1 += "p"
+                                            'q' -> name1 += "q"
+                                            'r' -> name1 += "r"
+                                            's' -> name1 += "s"
+                                            't' -> name1 += "t"
+                                            'u' -> name1 += "u"
+                                            'v' -> name1 += "v"
+                                            'w' -> name1 += "w"
+                                            'x' -> name1 += "x"
+                                            'y' -> name1 += "y"
+                                            'z' -> name1 += "z"
             }
             counter++
         }
@@ -152,32 +154,32 @@ object Utils {
                                       'э' -> name2 += "e"
                                       'ю' -> name2 += "yu"
                                       'я' -> name2 += "ya"
-                                            'a' -> name2 += 'a'
-                                            'b' -> name2 += 'b'
-                                            'c' -> name2 += 'c'
-                                            'd' -> name2 += 'd'
-                                            'e' -> name2 += 'e'
-                                            'f' -> name2 += 'f'
-                                            'g' -> name2 += 'g'
-                                            'h' -> name2 += 'h'
-                                            'i' -> name2 += 'i'
-                                            'j' -> name2 += 'j'
-                                            'k' -> name2 += 'k'
-                                            'l' -> name2 += 'l'
-                                            'm' -> name2 += 'm'
-                                            'n' -> name2 += 'n'
-                                            'o' -> name2 += 'o'
-                                            'p' -> name2 += 'p'
-                                            'q' -> name2 += 'q'
-                                            'r' -> name2 += 'r'
-                                            's' -> name2 += 's'
-                                            't' -> name2 += 't'
-                                            'u' -> name2 += 'u'
-                                            'v' -> name2 += 'v'
-                                            'w' -> name2 += 'w'
-                                            'x' -> name2 += 'x'
-                                            'y' -> name2 += 'y'
-                                            'z' -> name2 += 'z'}
+                                            'a' -> name2 += "a"
+                                            'b' -> name2 += "b"
+                                            'c' -> name2 += "c"
+                                            'd' -> name2 += "d"
+                                            'e' -> name2 += "e"
+                                            'f' -> name2 += "f"
+                                            'g' -> name2 += "g"
+                                            'h' -> name2 += "h"
+                                            'i' -> name2 += "i"
+                                            'j' -> name2 += "j"
+                                            'k' -> name2 += "k"
+                                            'l' -> name2 += "l"
+                                            'm' -> name2 += "m"
+                                            'n' -> name2 += "n"
+                                            'o' -> name2 += "o"
+                                            'p' -> name2 += "p"
+                                            'q' -> name2 += "q"
+                                            'r' -> name2 += "r"
+                                            's' -> name2 += "s"
+                                            't' -> name2 += "t"
+                                            'u' -> name2 += "u"
+                                            'v' -> name2 += "v"
+                                            'w' -> name2 += "w"
+                                            'x' -> name2 += "x"
+                                            'y' -> name2 += "y"
+                                            'z' -> name2 += "z"}
             counter++
             }
         name1 = name1.capitalize()
@@ -186,3 +188,4 @@ object Utils {
         return "$name1$divider$name2"
         }
 }
+
