@@ -37,7 +37,7 @@ object Utils {
         else return null
     }
 
-    fun transliteration(payload:String, divider:String = " "):String{
+    fun transliteration(payload:String, divider:String? = " "):String?{
 
         val fullname= parseFullName(payload)
 
@@ -81,7 +81,7 @@ object Utils {
                 'ц' -> name1 += "c"
                 'ч' -> name1 += "ch"
                 'ш' -> name1 += "sh"
-                'щ' -> name1 += "sh"
+                'щ' -> name1 += "sh'"
                 'ъ' -> name1 += ""
                 'ы' -> name1 += "i"
                 'ь' -> name1 += ""
@@ -115,7 +115,7 @@ object Utils {
                 'Ц' -> name1 += "C"
                 'Ч' -> name1 += "Ch"
                 'Ш' -> name1 += "Sh"
-                'Щ' -> name1 += "Sh"
+                'Щ' -> name1 += "Sh'"
                 'Ъ' -> name1 += ""
                 'Ы' -> name1 += "I"
                 'Ь' -> name1 += ""
@@ -211,7 +211,7 @@ object Utils {
                 'ц' -> name2 += "c"
                 'ч' -> name2 += "ch"
                 'ш' -> name2 += "sh"
-                'щ' -> name2 += "sh"
+                'щ' -> name2 += "sh'"
                 'ъ' -> name2 += ""
                 'ы' -> name2 += "i"
                 'ь' -> name2 += ""
@@ -245,7 +245,7 @@ object Utils {
                 'Ц' -> name2 += "C"
                 'Ч' -> name2 += "Ch"
                 'Ш' -> name2 += "Sh"
-                'Щ' -> name2 += "Sh"
+                'Щ' -> name2 += "Sh'"
                 'Ъ' -> name2 += ""
                 'Ы' -> name2 += "I"
                 'Ь' -> name2 += ""
