@@ -2,8 +2,9 @@ package ru.skillbranch.devintensive.utils
 
 object Utils {
     fun parseFullName(fullName:String?):Pair<String?, String?>{
-        val parts: List<String>? = fullName?.split(" ")
-
+        var FullName = fullName?.trim()
+        FullName = FullName?.replace("\\s+".toRegex(), " ")
+        val parts: List<String>? = FullName?.split(" ")
         val firstName = parts?.getOrNull(0)
         val lastName = parts?.getOrNull(1)
         return when (fullName){
@@ -13,8 +14,6 @@ object Utils {
 
         }
     }
-
-
 
     fun toInitials(firstName: String?, lastName: String?):String? {
         val first: String? = firstName?.toUpperCase()
@@ -37,18 +36,161 @@ object Utils {
         else return null
     }
 
+
+
     fun transliteration(payload:String, divider:String? = " "):String?{
 
-        val fullname= parseFullName(payload)
+        //  kill spaces around fullname and throw when Payload is empty
+        val Payload = payload.trim()
+        if(Payload == "") return ""
 
-        // разбиваю полное имя на имя и фамилию и перевожу в нижний регистр
+        //  splits fullname into firstname & lastname and turns to lowercase
+        val fullname= parseFullName(Payload)
         var name1 = fullname.first
         var name2 = fullname.second
+
+
+        if (name2 == " " || name2 == null) {
+            // разбиваю имя и фамилию на отдельные карактеры
+            val name1array:CharArray? = name1?.toCharArray()
+            var lenght:Int? = name1array?.size
+            var counter = 0
+            // транслитерирую имя
+            name1 = ""
+            while (counter != lenght){
+                when (name1array?.get(counter)){
+                    'а' -> name1 += "a"
+                    'б' -> name1 += "b"
+                    'в' -> name1 += "v"
+                    'г' -> name1 += "g"
+                    'д' -> name1 += "d"
+                    'е' -> name1 += "e"
+                    'ё' -> name1 += "e"
+                    'ж' -> name1 += "zh"
+                    'з' -> name1 += "z"
+                    'и' -> name1 += "i"
+                    'й' -> name1 += "i"
+                    'к' -> name1 += "k"
+                    'л' -> name1 += "l"
+                    'м' -> name1 += "m"
+                    'н' -> name1 += "n"
+                    'о' -> name1 += "o"
+                    'п' -> name1 += "p"
+                    'р' -> name1 += "r"
+                    'с' -> name1 += "s"
+                    'т' -> name1 += "t"
+                    'у' -> name1 += "u"
+                    'ф' -> name1 += "f"
+                    'х' -> name1 += "h"
+                    'ц' -> name1 += "c"
+                    'ч' -> name1 += "ch"
+                    'ш' -> name1 += "sh"
+                    'щ' -> name1 += "sh'"
+                    'ъ' -> name1 += ""
+                    'ы' -> name1 += "i"
+                    'ь' -> name1 += ""
+                    'э' -> name1 += "e"
+                    'ю' -> name1 += "yu"
+                    'я' -> name1 += "ya"
+
+                    'А' -> name1 += "A"
+                    'Б' -> name1 += "B"
+                    'В' -> name1 += "V"
+                    'Г' -> name1 += "G"
+                    'Д' -> name1 += "D"
+                    'Е' -> name1 += "E"
+                    'Ё' -> name1 += "E"
+                    'Ж' -> name1 += "Zh"
+                    'З' -> name1 += "Z"
+                    'И' -> name1 += "I"
+                    'Й' -> name1 += "I"
+                    'К' -> name1 += "K"
+                    'Л' -> name1 += "L"
+                    'М' -> name1 += "M"
+                    'Н' -> name1 += "N"
+                    'О' -> name1 += "O"
+                    'П' -> name1 += "P"
+                    'Р' -> name1 += "R"
+                    'С' -> name1 += "S"
+                    'Т' -> name1 += "T"
+                    'У' -> name1 += "U"
+                    'Ф' -> name1 += "F"
+                    'Х' -> name1 += "H"
+                    'Ц' -> name1 += "C"
+                    'Ч' -> name1 += "Ch"
+                    'Ш' -> name1 += "Sh"
+                    'Щ' -> name1 += "Sh'"
+                    'Ъ' -> name1 += ""
+                    'Ы' -> name1 += "I"
+                    'Ь' -> name1 += ""
+                    'Э' -> name1 += "E"
+                    'Ю' -> name1 += "Yu"
+                    'Я' -> name1 += "Ya"
+
+                    'a' -> name1 += "a"
+                    'b' -> name1 += "b"
+                    'c' -> name1 += "c"
+                    'd' -> name1 += "d"
+                    'e' -> name1 += "e"
+                    'f' -> name1 += "f"
+                    'g' -> name1 += "g"
+                    'h' -> name1 += "h"
+                    'i' -> name1 += "i"
+                    'j' -> name1 += "j"
+                    'k' -> name1 += "k"
+                    'l' -> name1 += "l"
+                    'm' -> name1 += "m"
+                    'n' -> name1 += "n"
+                    'o' -> name1 += "o"
+                    'p' -> name1 += "p"
+                    'q' -> name1 += "q"
+                    'r' -> name1 += "r"
+                    's' -> name1 += "s"
+                    't' -> name1 += "t"
+                    'u' -> name1 += "u"
+                    'v' -> name1 += "v"
+                    'w' -> name1 += "w"
+                    'x' -> name1 += "x"
+                    'y' -> name1 += "y"
+                    'z' -> name1 += "z"
+
+                    'A' -> name1 += "A"
+                    'B' -> name1 += "B"
+                    'C' -> name1 += "C"
+                    'D' -> name1 += "D"
+                    'E' -> name1 += "E"
+                    'F' -> name1 += "F"
+                    'G' -> name1 += "G"
+                    'H' -> name1 += "H"
+                    'I' -> name1 += "I"
+                    'J' -> name1 += "J"
+                    'K' -> name1 += "K"
+                    'L' -> name1 += "L"
+                    'M' -> name1 += "M"
+                    'N' -> name1 += "N"
+                    'O' -> name1 += "O"
+                    'P' -> name1 += "P"
+                    'Q' -> name1 += "Q"
+                    'R' -> name1 += "R"
+                    'S' -> name1 += "S"
+                    'T' -> name1 += "T"
+                    'U' -> name1 += "U"
+                    'V' -> name1 += "V"
+                    'W' -> name1 += "W"
+                    'X' -> name1 += "X"
+                    'Y' -> name1 += "Y"
+                    'Z' -> name1 += "Z"
+                }
+                counter++
+            }
+            return "$name1"
+
+        }
+
         // разбиваю имя и фамилию на отдельные карактеры
         val name1array:CharArray? = name1?.toCharArray()
         val name2array:CharArray? = name2?.toCharArray()
 
-        //
         var lenght:Int? = name1array?.size
         var counter = 0
         // транслитерирую имя
@@ -309,6 +451,7 @@ object Utils {
             }
             counter++
         }
+
         return "$name1$divider$name2"
     }
 }
