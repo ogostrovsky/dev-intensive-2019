@@ -1,18 +1,60 @@
 package ru.skillbranch.devintensive.extensions
 
-
 import java.text.SimpleDateFormat
 import java.util.*
 import java.lang.Math
-import java.util.logging.LogManager
-import kotlin.math.roundToLong
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
 const val HOUR = 60 * MINUTE
 const val DAY = 24 * HOUR
 
-enum class TimeUnits {SECOND, MINUTE, HOUR, DAY}
+enum class TimeUnits {SECOND, MINUTE, HOUR, DAY;
+
+    fun plural(value:Int):String{
+            var base = ""
+            val list1 =listOf(2,3,4)
+            val list2 =listOf(0,5,6,7,8,9,11,12,13,14,15,16,17,18,19)
+        if (this == SECOND) {
+            when (value % 10){
+                1        -> base = "секунду"
+                in list1 -> base = "секунды"
+                in list2 -> base = "секунд"}
+            when (value % 100){
+                1        -> base = "секунду"
+                in list1 -> base = "секунды"
+                in list2 -> base = "секунд"}}
+        if (this == MINUTE) {
+            when (value % 10){
+                1        -> base = "минуту"
+                in list1 -> base = "минуты"
+                in list2 -> base = "минут"}
+            when (value % 100){
+                1        -> base = "минуту"
+                in list1 -> base = "минуты"
+                in list2 -> base = "минут"}}
+        if (this == HOUR) {
+            when (value % 10){
+                1        -> base = "час"
+                in list1 -> base = "часа"
+                in list2 -> base = "часов"}
+            when (value % 100){
+                1        -> base = "час"
+                in list1 -> base = "часа"
+                in list2 -> base = "часов"}}
+        if (this == DAY) {
+            when (value % 10){
+                1        -> base = "день"
+                in list1 -> base = "дня"
+                in list2 -> base = "дней"}
+            when (value % 100){
+                1        -> base = "день"
+                in list1 -> base = "дня"
+                in list2 -> base = "дней"}}
+
+        return "$value $base"
+    }
+}
 
 fun Date.format(pattern: String = "HH:mm:ss dd.MM.yy"): String {
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
@@ -33,7 +75,7 @@ fun Date.add(value: Int, timeUnits: TimeUnits): Date {
 
 fun Date.humanizeDiff(date: Date = Date()):String{
 
-    var dif1:Long = (date.time - this.time) / 100
+    val dif1:Long = (date.time - this.time) / 100
 
     if (dif1 >= 0){
     if (dif1 in 0..10) return "только что"
@@ -45,7 +87,7 @@ fun Date.humanizeDiff(date: Date = Date()):String{
        else if (dif1 in 792000..936000) return "день назад"
        else if (dif1 in 936000..311040000) return humanizeDiffb((dif1/10)+1,"day","+")
         else return "более года назад"}
-    var dif2:Long = Math.abs(dif1)
+    val dif2:Long = Math.abs(dif1)
     if (dif1 < 0){
         if      (dif2 in 0..10) return "только что"
         else if (dif2 in 10 ..450) return "через несколько секунд"
@@ -60,14 +102,14 @@ fun Date.humanizeDiff(date: Date = Date()):String{
 fun humanizeDiffb (dif1:Long,cons:String,simbol:String):String{
 //----------------------------------------------------------------------------------
         var divider:Long = 0
-        var baceword:String = ""
+        var baceword = ""
 //----------------------------------------------------------------------------------
         when(cons){
             "minute" -> divider = 60
             "hour"   -> divider = 3600
             "day"    -> divider = 86400}
 //----------------------------------------------------------------------------------
-        var num1 = dif1 / divider
+        val num1 = dif1 / divider
         var num2 = Math.abs(num1) % 100
 //----------------------------------------------------------------------------------
         val set056789 = listOf<Long>(0,5,6,7,8,9)
