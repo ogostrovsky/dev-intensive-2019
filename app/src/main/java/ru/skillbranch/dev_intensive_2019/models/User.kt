@@ -11,8 +11,35 @@ data class User(
     var rating: Int = 0,
     var respect: Int = 0,
     var lastVisit: Date? = Date(),
-    var isOnline: Boolean = false
-) {
+    var isOnline: Boolean = false) {
+
+
+
+
+
+
+
+  //  inner class UserBuilder {
+  //      val id: String = id
+  //      var firstName: String?
+  //      var lastName: String?
+  //      var avatar: String?,
+  //      var rating: Int = 0,
+  //      var respect: Int = 0,
+  //      var lastVisit: Date? = Date(),
+  //      var isOnline: Boolean = false)
+    }
+
+
+
+
+
+
+
+
+
+
+
     /*constructor(id: String, firstName: String?, lastName: String?) : this(
         id = id,
         firstName = firstName,
@@ -22,18 +49,17 @@ data class User(
 
     constructor(id: String) : this(id, "John", "Doe")*/
 
-    init {
-        println("$firstName $lastName}")
-    }
+  // init {
+  //     println("$firstName $lastName}")
+  // }
 
-    companion object Factory {
-        private var lastId: Int = -1
-        fun makeUser(fullName: String?): User {
-            lastId++
-            val (firstName, lastName) = Utils.parseFullName(fullName)
-            return User(id = "$lastId", firstName = firstName, lastName = lastName, avatar = null)
-        }
-    }
+  // companion object Factory {
+  //     private var lastId: Int = -1
+  //     fun makeUser(fullName: String?): User {
+  //         lastId++
+  //         val (firstName, lastName) = Utils.parseFullName(fullName)
+  //         return User(id = "$lastId", firstName = firstName, lastName = lastName, avatar = null)
+  //     }
 
 
-}
+
