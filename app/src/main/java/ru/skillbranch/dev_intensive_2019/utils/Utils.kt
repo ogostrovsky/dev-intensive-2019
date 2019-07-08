@@ -41,11 +41,6 @@ object Utils {
         } else return null
     }
 
-
-
-
-
-
     @RequiresApi(Build.VERSION_CODES.N)
     fun transliteration(payload: String?, divider: String = " "): String? {
 
@@ -54,14 +49,13 @@ object Utils {
         Payload = Payload?.replace("\\s+".toRegex(),replacement = divider)
 
         var counter = 0
-        var size = Payload?.length
-        var result:String =""
+        val size = Payload?.length
+        var result = ""
         while(counter < size!!){
             result += makedick(Payload!!.get(counter))
             counter++}
 
         return result
-
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -133,7 +127,6 @@ object Utils {
         dict.put ('Э', "E")
         dict.put ('Ю', "Yu")
         dict.put ('Я', "Ya")
-
 
         val value = dict.getOrDefault(key = key,defaultValue = key.toString())
         return value
