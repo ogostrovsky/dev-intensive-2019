@@ -32,6 +32,7 @@
             android:background="@color/color_primary"
             android:layout_marginTop="@dimen/spacing_normal_16">
     <EditText
+
             android:id="@+id/et_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -39,6 +40,13 @@
             android:lines="1"
             android:textColor="@color/color_gray_light"
             android:textColorHint="@color/color_gray_light"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeActionLabel="@string/Done"
+
+
+
             android:hint="Введите текст"
             android:paddingTop="@dimen/spacing_normal_16"
             android:paddingBottom="@dimen/spacing_normal_16"
