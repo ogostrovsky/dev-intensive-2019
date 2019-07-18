@@ -1,5 +1,8 @@
 package ru.skillbranch.devintensive.models
 
+import android.util.Log
+import android.widget.TextView
+
 class Bender (var status:Status = Status.NORMAL, var question: Question = Question.NAME){
 
     fun askQuestion():String = when (question){
@@ -11,27 +14,37 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
         Question.IDLE -> Question.IDLE.question
     }
 
+    var counter = 0
+
     fun listenAnswer(answer:String) : Pair<String, Triple<Int, Int, Int>>{
 
-        return if(question.answer.contains(answer)){
+         if(question.answer.contains(answer)){
+             counter = 0
             question = question.nextQuestion()
-            "Отлично - это правильный ответ!\n${question.question}" to status.color}
+             return "Отлично - ты справился\n${question.question}" to status.color}
+        else if ( counter >= 2) {
+             counter = 0
+             status = Status.NORMAL
+             question = Question.NAME
+             return "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color}
         else {
+            counter++
             status = status.nextStatus()
-            "Это не правильный ответ!\n${question.question}" to status.color}
+             return "Это неправильный ответ\n${question.question}" to status.color}
     }
 
     enum class Status(val color:Triple<Int, Int, Int>){
         NORMAL (Triple(255,255,255)),
-        WARNING(Triple(255,120,0)),
-        DANGER(Triple(255,60,60)),
-        CRITICAL(Triple(255,0,0));
+        WARNING (Triple(255,120,0)),
+        DANGER (Triple(255,60,60)),
+        CRITICAL (Triple(255,0,0));
 
-        fun nextStatus():Status{
-            return if(this.ordinal< values().lastIndex){
-                values()[this.ordinal +1]}
+         fun nextStatus():Status{
+             if(this.ordinal < values().lastIndex){
+               return values()[this.ordinal +1]}
+
             else{
-                values()[0]
+               return values()[this.ordinal]
             }
 
         }
@@ -41,19 +54,19 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
         NAME("Как меня зовут?", listOf("бендер","bender")){
             override fun nextQuestion(): Question = PROFESSION
         },
-        PROFESSION("Назови мою профессию?", listOf("сгибальщик",",bender")){
+        PROFESSION("Назови мою профессию?", listOf("сгибальщик","bender")){
             override fun nextQuestion(): Question = MATERIAL
         },
         MATERIAL("Из чего я сделан?", listOf("iron","metal","wood","дерево","металл")){
             override fun nextQuestion(): Question = BDAY
         },
-        BDAY("Когда меня создали?", listOf("2993")){
+        BDAY("Когда меня создали?", listOf("2993","а я ебу?")){
             override fun nextQuestion(): Question = SERIAL
         },
         SERIAL("Мой серийный номер?", listOf("2716057")){
             override fun nextQuestion(): Question = IDLE
         },
-        IDLE("На этом всё, вопросов больше нет", listOf()){
+        IDLE("На этом все, вопросов больше нет", listOf()){
             override fun nextQuestion(): Question = IDLE
         };
         abstract fun nextQuestion():Question
