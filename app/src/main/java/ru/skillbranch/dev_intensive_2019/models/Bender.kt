@@ -1,8 +1,5 @@
 package ru.skillbranch.devintensive.models
 
-import android.util.Log
-import android.widget.TextView
-
 class Bender (var status:Status = Status.NORMAL, var question: Question = Question.NAME){
 
     fun askQuestion():String = when (question){
