@@ -10,24 +10,24 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
         Question.SERIAL -> Question.SERIAL.question
         Question.IDLE -> Question.IDLE.question
     }
-
     var counter = 0
 
     fun listenAnswer(answer:String) : Pair<String, Triple<Int, Int, Int>>{
 
-         if(question.answer.contains(answer.toLowerCase())){
-             counter = 0
+        return if(question.answer.contains(answer.toLowerCase())){
+            counter = 0
             question = question.nextQuestion()
-             return "Отлично - ты справился\n${question.question}" to status.color}
-        else if ( counter >= 2) {
-             counter = 0
-             status = Status.NORMAL
-             question = Question.NAME
-             return "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color}
-        else {
+            "Отлично - ты справился\n${question.question}" to status.color
+        } else if ( counter >= 2) {
+            counter = 0
+            status = Status.NORMAL
+            question = Question.NAME
+            "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+        } else {
             counter++
             status = status.nextStatus()
-             return "Это неправильный ответ\n${question.question}" to status.color}
+            "Это неправильный ответ\n${question.question}" to status.color
+        }
     }
 
     enum class Status(val color:Triple<Int, Int, Int>){
@@ -37,13 +37,9 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
         CRITICAL (Triple(255,0,0));
 
          fun nextStatus():Status{
-             if(this.ordinal < values().lastIndex){
-               return values()[this.ordinal +1]}
-
-            else{
-               return values()[this.ordinal]
-            }
-
+             return if(this.ordinal < values().lastIndex){
+                 values()[this.ordinal +1]
+             } else values()[0]
         }
     }
 

@@ -43,13 +43,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
 
-        messageEt.setOnEditorActionListener { v, actionId, event ->
+        messageEt.setOnEditorActionListener { _, _, _ ->
             hideKeyboard()
             sendMessageToBender()
             true
         }
-
-
     }
     override fun onRestart(){
         super.onRestart()
@@ -91,10 +89,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
             hideKeyboard()
             sendMessageToBender()
+            messageEt.setText("")
+            val (r, g, b) = color
+            benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+            textTxt.text = phrase
         }
     }
 
-    fun sendMessageToBender() {
+    private fun sendMessageToBender() {
         val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
         messageEt.setText("")
         val (r, g, b) = color
