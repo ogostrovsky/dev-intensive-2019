@@ -18,7 +18,7 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
 
     fun listenAnswer(answer:String) : Pair<String, Triple<Int, Int, Int>>{
 
-         if(question.answer.contains(answer)){
+         if(question.answer.contains(answer.toLowerCase())){
              counter = 0
             question = question.nextQuestion()
              return "Отлично - ты справился\n${question.question}" to status.color}
@@ -60,7 +60,7 @@ class Bender (var status:Status = Status.NORMAL, var question: Question = Questi
         MATERIAL("Из чего я сделан?", listOf("iron","metal","wood","дерево","металл")){
             override fun nextQuestion(): Question = BDAY
         },
-        BDAY("Когда меня создали?", listOf("2993","а я ебу?")){
+        BDAY("Когда меня создали?", listOf("2993")){
             override fun nextQuestion(): Question = SERIAL
         },
         SERIAL("Мой серийный номер?", listOf("2716057")){
